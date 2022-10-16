@@ -31,4 +31,6 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nameless-hollows-81509"
-          heroku_email: "james.ingerson@outlook.com"
+          heroku_email: ${{secrets.EMAIL_ADDRESS}}
+          healthcheck: "https://nameless-hollows-81509.herokuapp.com/health"
+          checkstring: "ok"
