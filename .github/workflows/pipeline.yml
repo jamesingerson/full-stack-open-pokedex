@@ -39,6 +39,20 @@ jobs:
           healthcheck: "https://nameless-hollows-81509.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            details: Deploy Succeeded!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+            severity: error
+            details: Deploy Failed!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
